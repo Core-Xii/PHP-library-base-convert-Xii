@@ -18,7 +18,6 @@ class Base_Convert
 	const BASE_ALPHANUMERIC_UNAMBIGUOUS_CASE_SENSITIVE_STRING = '0123456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ';
 	const BASE_URLENCODE_STRING                               = '0123456789abcdefghijklmnopqrstuvwxyz-_.~';
 	const BASE_GOOGLE_CHART_EXT_STRING                        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-';
-	public static $BASE_FULL = range(0, 255);
 	
 	/**
 		Value and bases can be given as arrays of integers or as strings.
