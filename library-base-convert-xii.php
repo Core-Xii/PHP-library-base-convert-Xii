@@ -70,16 +70,7 @@ class Base_Convert
 		return self::array_to_string($converted_value, $target_base);
 		}
 	
-	/**
-		Deprecated. Use convert() with the same arguments; it now handles strings.
-	*/
-	public static function convert_string($value_string, &$base_target, &$base_source)
-		{
-		trigger_error('convert_string() is deprecated. Use convert() with the same arguments; it now handles strings.', E_USER_DEPRECATED);
-		return self::convert($value_string, $base_target, $base_source);
-		}
-	
-	public static function convert_array(array $value, $base_target_length, $base_source_length)
+	private static function convert_array(array $value, $base_target_length, $base_source_length)
 		{
 		$value_length = count($value);
 		$result = array();
@@ -107,7 +98,7 @@ class Base_Convert
 		return $result;
 		}
 	
-	public static function array_to_string(array $value, array &$base)
+	private static function array_to_string(array $value, array &$base)
 		{
 		$string = '';
 		foreach ($value as $digit)
@@ -117,7 +108,7 @@ class Base_Convert
 		return $string;
 		}
 	
-	public static function string_to_array($value_string, array &$base)
+	private static function string_to_array($value_string, array &$base)
 		{
 		$array = array();
 		while ($value_string === '0' || !empty($value_string))
