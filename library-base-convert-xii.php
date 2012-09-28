@@ -20,23 +20,64 @@ class Base_Convert
 	const BASE_GOOGLE_CHART_EXT_STRING                        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-';
 	public static $BASE_FULL = range(0, 255);
 	
-	public static function convert($value_string, $base_target_string, $base_source_string = self::BASE_DECIMAL_STRING)
+	/**
+		Value and bases can be given as arrays of integers or as strings.
+	*/
+	public static function convert($value, &$target_base, &$source_base, $return_as_array = false)
 		{
-		return self::convert_string($value_string, str_split($base_target_string), str_split($base_source_string));
+		if ($target_base == $source_base)
+			{
+			if ($return_as_array && is_string($value))
+				{
+				if (is_string($source_base))
+					{
+					$source_base = str_split($source_base);
+					}
+				return self::string_to_array($value, $source_base);
+				}
+			else if ($return_as_array || is_string($value))
+				{
+				return $value;
+				}
+			
+			if (is_string($target_base))
+				{
+				$target_base = str_split($target_base);
+				}
+			return self::array_to_string($value, $target_base);
+			}
+		
+		if (is_string($source_base))
+			{
+			$source_base = str_split($source_base);
+			}
+		
+		if (is_string($value))
+			{
+			$value = self::string_to_array($value, $source_base);
+			}
+		
+		$converted_value = self::convert_array($value, strlen($target_base), count($source_base));
+		
+		if ($return_as_array)
+			{
+			return $converted_value;
+			}
+		
+		if (is_string($target_base))
+			{
+			$target_base = str_split($target_base);
+			}
+		return self::array_to_string($converted_value, $target_base);
 		}
 	
+	/**
+		Deprecated. Use convert() with the same arguments; it now handles strings.
+	*/
 	public static function convert_string($value_string, &$base_target, &$base_source)
 		{
-		return self::array_to_string
-			(
-			self::convert_array
-				(
-				self::string_to_array(string($value_string), $base_source),
-				count($base_target),
-				count($base_source)
-				),
-			$base_target
-			);
+		trigger_error('convert_string() is deprecated. Use convert() with the same arguments; it now handles strings.', E_USER_DEPRECATED);
+		return self::convert($value_string, $base_target, $base_source);
 		}
 	
 	public static function convert_array(array $value, $base_target_length, $base_source_length)
