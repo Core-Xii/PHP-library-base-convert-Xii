@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright © 2012, Akseli "Core Xii" Tarkkio <corexii@gmail.com>
+	Copyright © 2012, Akseli "Core Xii" Tarkkio <corexii@corexii.com>
 
 	Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
@@ -16,8 +16,9 @@ class Base_Convert
 	const BASE_ALPHANUMERIC_STRING                            = '0123456789abcdefghijklmnopqrstuvwxyz';
 	const BASE_ALPHANUMERIC_CASE_SENSITIVE_STRING             = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	const BASE_ALPHANUMERIC_UNAMBIGUOUS_CASE_SENSITIVE_STRING = '0123456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ';
-	const BASE_URLENCODE_STRING                               = '0123456789abcdefghijklmnopqrstuvwxyz-_';
+	const BASE_URLENCODE_STRING                               = '0123456789abcdefghijklmnopqrstuvwxyz-_.~';
 	const BASE_GOOGLE_CHART_EXT_STRING                        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-';
+	public static $BASE_FULL = range(0, 255);
 	
 	public static function convert($value_string, $base_target_string, $base_source_string = self::BASE_DECIMAL_STRING)
 		{
