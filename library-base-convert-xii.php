@@ -51,9 +51,9 @@ class Base_Convert
 			$source_base = str_split($source_base);
 			}
 		
-		if (is_string($value))
+		if (!is_array($value))
 			{
-			$value = self::string_to_array($value, $source_base);
+			$value = self::string_to_array((string) $value, $source_base);
 			}
 		
 		$converted_value = self::convert_array($value, strlen($target_base), count($source_base));
