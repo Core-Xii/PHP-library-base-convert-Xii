@@ -20,35 +20,31 @@ class Base_Convert
 	const BASE_GOOGLE_CHART_EXT_STRING                        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-';
 	
 	/**
-		Value and bases can be given as arrays of integers or as strings.
+		Value can be given as an array of integers, a string or a number.
+		Bases can be given as arrays of strings or as strings.
 	*/
 	public static function convert($value, $target_base, $source_base, $return_as_array = false)
 		{
-		if ($target_base == $source_base)
+		if (is_string($target_base))
 			{
-			if ($return_as_array && is_string($value))
-				{
-				if (is_string($source_base))
-					{
-					$source_base = str_split($source_base);
-					}
-				return self::string_to_array($value, $source_base);
-				}
-			else if ($return_as_array || is_string($value))
-				{
-				return $value;
-				}
-			
-			if (is_string($target_base))
-				{
-				$target_base = str_split($target_base);
-				}
-			return self::array_to_string($value, $target_base);
+			$target_base = str_split($target_base);
 			}
-		
 		if (is_string($source_base))
 			{
 			$source_base = str_split($source_base);
+			}
+		
+		if ($target_base == $source_base)
+			{
+			if ($return_as_array && !is_array($value))
+				{
+				return self::string_to_array($value, $source_base);
+				}
+			else if ($return_as_array || !is_array($value))
+				{
+				return $value;
+				}
+			return self::array_to_string($value, $target_base);
 			}
 		
 		if (!is_array($value))
@@ -56,17 +52,13 @@ class Base_Convert
 			$value = self::string_to_array((string) $value, $source_base);
 			}
 		
-		$converted_value = self::convert_array($value, strlen($target_base), count($source_base));
+		$converted_value = self::convert_array($value, count($target_base), count($source_base));
 		
 		if ($return_as_array)
 			{
 			return $converted_value;
 			}
 		
-		if (is_string($target_base))
-			{
-			$target_base = str_split($target_base);
-			}
 		return self::array_to_string($converted_value, $target_base);
 		}
 	
