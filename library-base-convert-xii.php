@@ -20,8 +20,8 @@ class Base_Convert
 	const BASE_GOOGLE_CHART_EXT_STRING                        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-';
 	
 	/**
-		Value can be given as an array of integers, a string or a number.
-		Bases can be given as arrays of strings or as strings.
+		Value can be given as an array of integers, a string, or an integer.
+		Bases can be given as arrays of strings, arrays of integers, or as strings.
 	*/
 	public static function convert($value, $target_base, $source_base, $return_as_array = false)
 		{
@@ -95,7 +95,7 @@ class Base_Convert
 		$string = '';
 		foreach ($value as $digit)
 			{
-			$string .= $base[$digit];
+			$string .= (string) $base[$digit];
 			}
 		return $string;
 		}
@@ -107,6 +107,7 @@ class Base_Convert
 			{
 			foreach ($base as $index => $digit)
 				{
+				$digit = (string) $digit;
 				if (mb_substr($value_string, 0, $digit_length = mb_strlen($digit)) === $digit)
 					{
 					$array[] = $index;
