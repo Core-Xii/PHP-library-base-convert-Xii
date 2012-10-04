@@ -83,7 +83,7 @@ class Base_Convert
 				$divide = $divide * $base_source_length + $value[$i];
 				if ($divide >= $base_target_length)
 					{
-					$value[$result_length ++] = int($divide / $base_target_length);
+					$value[$result_length ++] = (int) ($divide / $base_target_length);
 					$divide = $divide % $base_target_length;
 					}
 				else if ($result_length > 0)
