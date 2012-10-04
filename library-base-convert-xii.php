@@ -22,7 +22,7 @@ class Base_Convert
 	/**
 		Value and bases can be given as arrays of integers or as strings.
 	*/
-	public static function convert($value, &$target_base, &$source_base, $return_as_array = false)
+	public static function convert($value, $target_base, $source_base, $return_as_array = false)
 		{
 		if ($target_base == $source_base)
 			{
